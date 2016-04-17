@@ -1,5 +1,8 @@
 package org.vaadin.olli;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -7,17 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.vaadin.olli.domain.Location;
-import org.vaadin.olli.domain.Role;
-import org.vaadin.olli.domain.Status;
 import org.vaadin.olli.domain.User;
 import org.vaadin.olli.repository.LocationsRepository;
 import org.vaadin.olli.repository.UserRepository;
-
-import java.math.BigDecimal;
-import java.util.*;
 
 @SpringBootApplication
 @Configuration
@@ -41,7 +38,7 @@ public class ShowPlacesApplication {
                 addUser("admin", "admin");
                 addUser("user", "user");
 
-                generateExpenses();
+                generateDemoData();
             }
 
             private void generateDemoData() {

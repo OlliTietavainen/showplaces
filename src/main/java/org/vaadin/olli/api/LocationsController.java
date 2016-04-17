@@ -1,17 +1,18 @@
 package org.vaadin.olli.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-import org.vaadin.olli.auth.UserAuthentication;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.vaadin.olli.domain.Location;
-import org.vaadin.olli.domain.Status;
 import org.vaadin.olli.domain.User;
 import org.vaadin.olli.repository.LocationsRepository;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -26,7 +27,6 @@ public class LocationsController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> createExpense(@RequestBody Location location) {
-        location.setStatus(Status.NEW);
         location.setUser(getCurrentUser());
         locationsRepository.save(location);
 
@@ -39,9 +39,7 @@ public class LocationsController {
 
         if (location.getUser().equals(getCurrentUser())) {
             location.setDate(newExpense.getDate());
-            location.setMerchant(newExpense.getMerchant());
             location.setComment(newExpense.getComment());
-            location.setTotal(newExpense.getTotal());
 
             locationsRepository.save(location);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -54,7 +52,7 @@ public class LocationsController {
     ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
         Location location = locationsRepository.findOne(id);
 
-        if (location.getUser().equals(getCurrentUser()) && location.getStatus() == Status.NEW) {
+        if (location.getUser().equals(getCurrentUser())) {
             locationsRepository.delete(location);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -63,6 +61,6 @@ public class LocationsController {
     }
 
     private User getCurrentUser() {
-        return ((UserAuthentication) SecurityContextHolder.getContext().getAuthentication()).getDetails().getUser();
+        return null; //TODO
     }
 }
