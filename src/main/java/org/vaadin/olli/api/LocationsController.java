@@ -21,12 +21,12 @@ public class LocationsController {
 	LocationsRepository locationsRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Location> getExpenses() {
+	public List<Location> getLocations() {
 		return locationsRepository.findAll();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> createExpense(@RequestBody Location location) {
+	public ResponseEntity<Void> createLocation(@RequestBody Location location) {
 		location.setUser(getCurrentUser());
 		locationsRepository.save(location);
 
@@ -34,7 +34,7 @@ public class LocationsController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	ResponseEntity<Void> updateExpense(@PathVariable Long id, @RequestBody Location newLoc) {
+	ResponseEntity<Void> updateLocation(@PathVariable Long id, @RequestBody Location newLoc) {
 		Location location = locationsRepository.findOne(id);
 
 		if (location.getUser().equals(getCurrentUser())) {
@@ -56,7 +56,6 @@ public class LocationsController {
 	}
 
 	private User getCurrentUser() {
-		return null;// return ((UserAuthentication)
-					// SecurityContextHolder.getContext().getAuthentication()).getDetails().getUser();
+		return null;
 	}
 }
