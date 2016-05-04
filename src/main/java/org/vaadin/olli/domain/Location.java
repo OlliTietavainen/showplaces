@@ -44,14 +44,6 @@ public class Location {
         this.user = user;
     }
 
-    public String getMerchant() {
-        return merchant;
-    }
-
-    public void setMerchant(String merchant) {
-        this.merchant = merchant;
-    }
-
     public Date getDate() {
         return date;
     }

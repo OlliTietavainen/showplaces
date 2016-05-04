@@ -9,5 +9,4 @@ import java.util.List;
 
 public interface LocationsRepository extends JpaRepository<Location, Long> {
 
-    List<Location> findByUserOrderByDateDesc(User user);
 }
