@@ -1,5 +1,6 @@
 package org.vaadin.olli;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -47,6 +48,8 @@ public class ShowPlacesApplication {
                 Random random = new Random();
                 for (int i = 0; i < howMany; i++) {
                     Location location = new Location();
+                    location.setX(new BigDecimal(random.nextDouble()));
+                    location.setY(new BigDecimal(random.nextDouble()));
                     locations.add(location);
                 }
 

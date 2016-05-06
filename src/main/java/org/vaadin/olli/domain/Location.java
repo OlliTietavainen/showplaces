@@ -19,8 +19,26 @@ public class Location {
     private Date date;
     private String comment;
     private String keyword;
+    private BigDecimal x;
+    private BigDecimal y;
 
-    public String getKeyword() {
+    public BigDecimal getX() {
+		return x;
+	}
+
+	public void setX(BigDecimal x) {
+		this.x = x;
+	}
+
+	public BigDecimal getY() {
+		return y;
+	}
+
+	public void setY(BigDecimal y) {
+		this.y = y;
+	}
+
+	public String getKeyword() {
 		return keyword;
 	}
 
